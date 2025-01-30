@@ -154,7 +154,7 @@ input.empty {
   }
   .box {
     padding: 5px 10px;
-    min-height: 70%;
+    min-height: 60%;
   }
   input {
     padding: 5px 10px;
