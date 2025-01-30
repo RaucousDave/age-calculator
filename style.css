@@ -1,0 +1,157 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins";
+  transition: all 500ms ease;
+}
+body {
+  height: 100vh;
+}
+img {
+  width: 100%;
+  height: auto;
+}
+:root {
+  --color-one: hsl(259, 100%, 65%);
+  --color-two: hsl(0, 100%, 67%);
+}
+.container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  background-color: lightgrey;
+  padding: 180px;
+}
+.grid {
+  display: flex;
+}
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  margin: 5px;
+}
+label {
+  color: hsl(0, 1%, 44%);
+}
+input {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 1px solid hsl(0, 0%, 85%);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.img-box {
+  width: 100%;
+  margin: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+.img-container {
+  background-color: var(--color-one);
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  border-radius: 50px;
+}
+.img-container:hover {
+  background-color: hsl(0, 0%, 8%);
+}
+.img-container::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5px;
+  background: hsl(0, 0%, 5%);
+  z-index: -1;
+}
+.box {
+  background-color: white;
+  width: 100%;
+  padding: 20px 80px;
+  border-radius: 20px;
+  border-bottom-right-radius: 80px;
+}
+span {
+  color: var(--color-one);
+}
+p {
+  color: hsl(0, 0%, 8%);
+}
+span,
+p {
+  font-size: 4rem;
+  font-weight: 800;
+  font-style: italic;
+}
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid var(--color-one);
+}
+p.empty {
+  font-size: 0.7rem;
+  margin-top: 10px;
+  display: none;
+}
+.empty {
+  color: var(--color-two);
+}
+input.empty {
+  border: 1px solid var(--color-two);
+}
+@media (max-width: 450px) {
+  .container {
+    padding: 15px;
+  }
+  .box {
+    padding: 5px 10px;
+    min-height: 85%;
+  }
+  input {
+    padding: 5px 10px;
+    font-size: 1rem;
+  }
+  span,
+  p {
+    font-size: 2rem;
+  }
+  .img-box {
+    justify-content: center;
+    margin: 20px 0 50px;
+  }
+  .img-container {
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+  }
+  label {
+    font-size: 0.8rem;
+  }
+  .grid {
+    margin-top: 20px;
+  }
+  span {
+    margin-left: 25px;
+  }
+}
