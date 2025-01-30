@@ -122,11 +122,11 @@ input.empty {
 }
 @media (max-width: 450px) {
   .container {
-    padding: 15px;
+    padding: 5px;
   }
   .box {
-    padding: 5px 10px;
-    min-height: 85%;
+    padding: 5px 10px 10px;
+    min-height: 50%;
   }
   input {
     padding: 5px 10px;

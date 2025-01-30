@@ -69,66 +69,68 @@ const ageCalculate = () => {
 
     const loweryearBoundary = 1900;
 
-    // To prevent other paragraphs from showing text when one is invalid
-    const blankSlate = (index) => {
-      paragraph.forEach((para) => {
-        para.style.display = "none";
-      });
-      //Collects the index of an array of p tags and makes it visible
-      paragraph[index].style.display = "block";
+    //  Object for storing errors in input field
+    let errors = {
+      days: "",
+      month: "",
+      year: "",
     };
-    // Stops age calculation output
-    const blankOutput = () => {
-      spans.forEach((span) => {
-        span.textContent = "-- ";
-      });
+
+    // Handles leap years and out of bound dates in specific months
+    const getdaysInMonth = (month, year) => {
+      if (month == 2) {
+        return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)
+          ? 29
+          : 28;
+      } else if ([4, 6, 9, 11].includes(month)) {
+        return 30;
+      } else {
+        return 31;
+      }
     };
+
     if (birthmonth < 1 || birthmonth > 12) {
       changeDOM();
-      blankOutput();
-      blankSlate(1);
-      paragraph[1].textContent = "Must be a valid month";
-    } else if (birthyear == currentYear && birthmonth > currentMonth) {
+      errors.month = "Invalid month";
+    }
+    if (birthyear == currentYear && birthmonth > currentMonth) {
       changeDOM();
-      blankOutput();
-      blankSlate(1);
-      paragraph[1].textContent = "Invalid month";
-    } else if (
+      errors.month = "Invalid month";
+    }
+    if (
       birthyear == currentYear &&
       birthmonth == currentMonth &&
       birthday > currentDay
     ) {
       changeDOM();
-      blankOutput();
-      blankSlate(0);
-      paragraph[0].textContent = "Invalid date";
-    } else if (birthyear > currentYear || birthyear < loweryearBoundary) {
-      changeDOM();
-      blankOutput();
-      blankSlate(2);
-      paragraph[2].textContent = "Invalid year";
-    } else if (birthday < 1 || birthday > getdaysInMonth(month, year)) {
-      changeDOM();
-      blankOutput();
-      blankSlate(0);
-      paragraph[0].textContent = "Invalid date";
+      errors.days = "Invalid date";
     }
-  };
-  const getdaysInMonth = (month) => {
-    if (month == 2) {
-      return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0) ? 29 : 28;
-    } else if ([4, 6, 9, 11].includes(month)) {
-      return 30;
-    } else {
-      return 31;
+    if (birthyear > currentYear || birthyear < loweryearBoundary) {
+      changeDOM();
+      errors.year = "Invalid year";
     }
-  };
+    if (birthday < 1 || birthday > getdaysInMonth(month, year)) {
+      changeDOM();
+      errors.days = "Invalid date";
+    }
+    paragraph[0].textContent = errors.days;
+    paragraph[1].textContent = errors.month;
+    paragraph[2].textContent = errors.year;
+    // Show only paragraphs that have an error message
+    paragraph.forEach((para, index) => {
+      para.style.display = paragraph[index].textContent ? "block" : "none";
+    });
 
+    if (errors.days || errors.month || errors.year) {
+      changeDOM();
+      return;
+    }
+
+    spans[0].textContent = age;
+
+    spans[1].textContent = monthDifference;
+
+    spans[2].textContent = dayDifference;
+  };
   validateInput(day, month, year);
-
-  spans[0].textContent = age;
-
-  spans[1].textContent = monthDifference;
-
-  spans[2].textContent = dayDifference;
 };
